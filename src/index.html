@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="color-scheme: dark;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
     <title>S&P 500 Real Returns (2005-2024)</title>
     <style>
         * {
@@ -11,7 +12,7 @@
             box-sizing: border-box;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: #0f0f0f;
             color: #e0e0e0;
             padding: 40px;
@@ -38,15 +39,25 @@
             margin-bottom: 40px;
         }
         th {
-            background: #1a1a1a;
-            padding: 14px 12px;
+            background: #161616;
+            padding: 12px 12px 10px;
             text-align: right;
-            font-weight: 600;
-            color: #aaa;
-            border-bottom: 2px solid #333;
+            font-weight: 500;
+            font-size: 12px;
+            color: #888;
+            border-bottom: 1px solid #252525;
+            vertical-align: bottom;
         }
         th:first-child {
             text-align: left;
+            border-left: 3px solid #333;
+        }
+        th small {
+            display: block;
+            font-weight: 400;
+            font-size: 10px;
+            color: #555;
+            margin-top: 2px;
         }
         td {
             padding: 12px;
@@ -80,31 +91,53 @@
         }
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
             margin-bottom: 40px;
         }
+        @media (max-width: 800px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr; }
+        }
         .stat-card {
-            background: #1a1a1a;
-            border-radius: 12px;
-            padding: 24px;
-            border: 1px solid #333;
+            position: relative;
+            background: #161616;
+            border: 1px solid #252525;
+            border-radius: 8px;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .stat-card .spark {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 60px;
+            opacity: 0.25;
+            pointer-events: none;
+        }
+        .stat-card .spark path {
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
         .stat-label {
-            color: #888;
+            color: #666;
             font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
             margin-bottom: 8px;
         }
         .stat-value {
             font-size: 32px;
-            font-weight: 700;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
         }
         .stat-detail {
-            font-size: 13px;
-            color: #666;
-            margin-top: 4px;
+            font-size: 12px;
+            color: #444;
+            margin-top: 6px;
         }
         .note {
             background: #1a1a1a;
@@ -282,6 +315,32 @@
             opacity: 1;
             visibility: visible;
         }
+        @media (prefers-reduced-motion: reduce) {
+            .tooltip::after,
+            .tooltip::before {
+                transition: none;
+            }
+        }
+        .stat-breakdown {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #222;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .stat-row:last-child {
+            margin-bottom: 0;
+        }
+        .stat-row-label {
+            color: #555;
+        }
+        .stat-row-value {
+            font-variant-numeric: tabular-nums;
+        }
     </style>
 </head>
 <body>
@@ -291,31 +350,40 @@
 
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-label">20-Year Nominal <span class="tooltip" data-tip="Compound Annual Growth Rate — average yearly return">CAGR</span></div>
+                <div class="stat-label">Nominal <span class="tooltip" data-tip="Compound Annual Growth Rate — average yearly return">CAGR</span></div>
                 <div class="stat-value positive">+10.4%</div>
-                <div class="stat-detail">Total return with dividends</div>
+                <div class="stat-detail">20-year total return</div>
+                <svg class="spark" viewBox="0 0 100 40" preserveAspectRatio="none">
+                    <path fill="#4ade80" stroke="#4ade80" d="M0,35 L5,34 L10,30 L15,28 L20,38 L25,32 L30,28 L35,27 L40,24 L45,20 L50,14 L55,10 L60,8 L65,12 L70,6 L75,4 L80,2 L85,5 L90,3 L95,2 L100,1 L100,40 L0,40 Z"/>
+                </svg>
             </div>
             <div class="stat-card">
-                <div class="stat-label">20-Year Real <span class="tooltip" data-tip="Compound Annual Growth Rate — average yearly return">CAGR</span></div>
+                <div class="stat-label">Real <span class="tooltip" data-tip="Compound Annual Growth Rate — average yearly return">CAGR</span></div>
                 <div class="stat-value neutral">+7.6%</div>
                 <div class="stat-detail">Inflation-adjusted</div>
+                <svg class="spark" viewBox="0 0 100 40" preserveAspectRatio="none">
+                    <path fill="#fbbf24" stroke="#fbbf24" d="M0,32 L5,32 L10,28 L15,27 L20,38 L25,34 L30,31 L35,30 L40,29 L45,26 L50,22 L55,19 L60,18 L65,24 L70,18 L75,14 L80,12 L85,16 L90,12 L95,10 L100,8 L100,40 L0,40 Z"/>
+                </svg>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Cumulative Inflation</div>
-                <div class="stat-value negative">-39%</div>
-                <div class="stat-detail">$1 (2005) = $0.61 today</div>
+                <div class="stat-label">Purchasing Power Lost</div>
+                <div class="stat-value negative">−39%</div>
+                <div class="stat-detail">$1 → $0.61</div>
+                <svg class="spark" viewBox="0 0 100 40" preserveAspectRatio="none">
+                    <path fill="#f87171" stroke="#f87171" d="M0,5 L5,6 L10,7 L15,8 L20,8 L25,9 L30,10 L35,11 L40,12 L45,13 L50,14 L55,15 L60,16 L65,18 L70,22 L75,28 L80,30 L85,33 L90,35 L95,37 L100,38 L100,40 L0,40 Z"/>
+                </svg>
             </div>
             <div class="stat-card">
-                <div class="stat-label">$10K Investment (2005)</div>
+                <div class="stat-label">$10K → Today</div>
                 <div class="stat-value">$71,736</div>
-                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #333;">
-                    <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px;">
-                        <span style="color: #888;">Real value (2005$)</span>
-                        <span style="color: #4ade80; font-weight: 600;">$43,759</span>
+                <div class="stat-breakdown">
+                    <div class="stat-row">
+                        <span class="stat-row-label">Real value</span>
+                        <span class="stat-row-value positive">$43,759</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; font-size: 13px;">
-                        <span style="color: #888;">Lost to inflation</span>
-                        <span style="color: #f87171; font-weight: 600;">−$27,977</span>
+                    <div class="stat-row">
+                        <span class="stat-row-label">Lost to inflation</span>
+                        <span class="stat-row-value negative">−$27,977</span>
                     </div>
                 </div>
             </div>
@@ -325,12 +393,12 @@
             <thead>
                 <tr>
                     <th>Year</th>
-                    <th>S&P 500<br>Total Return</th>
-                    <th>US Inflation<br>(CPI Dec YoY)</th>
-                    <th>Real Return<br>(Inflation-Adj)</th>
-                    <th>$1 Purchase<br>Power</th>
-                    <th>$10K<br>Nominal</th>
-                    <th>$10K<br>Real Value</th>
+                    <th>S&P 500<small>Total Return</small></th>
+                    <th>Inflation<small>CPI YoY</small></th>
+                    <th>Real Return<small>Adjusted</small></th>
+                    <th>$1 Value<small>Purchasing Power</small></th>
+                    <th>$10K<small>Nominal</small></th>
+                    <th>$10K<small>Real</small></th>
                 </tr>
             </thead>
             <tbody>
