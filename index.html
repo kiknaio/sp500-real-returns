@@ -37,6 +37,29 @@
             max-width: 1200px;
             margin: 0 auto;
         }
+        .brand {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #4ade80, #22d3ee, #4ade80);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s linear infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .brand {
+                animation: none;
+                background: #4ade80;
+                -webkit-text-fill-color: #4ade80;
+            }
+        }
         h1 {
             font-size: 28px;
             margin-bottom: 8px;
@@ -556,6 +579,7 @@
 </head>
 <body>
     <div class="container">
+        <div class="brand">realreturns.xyz</div>
         <h1>S&P 500: Nominal vs Real Returns (2005-2025)</h1>
         <p class="subtitle">What you actually gain after accounting for USD purchasing power loss</p>
         <p class="sp500-info">
