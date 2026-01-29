@@ -47,11 +47,16 @@
             margin-bottom: 32px;
             font-size: 14px;
         }
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 40px;
+            -webkit-overflow-scrolling: touch;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
-            margin-bottom: 40px;
+            min-width: 700px;
         }
         th {
             background: #161616;
@@ -115,6 +120,9 @@
         }
         @media (max-width: 480px) {
             .stats-grid { grid-template-columns: 1fr; }
+            body { padding: 20px; }
+            h1 { font-size: 22px; }
+            .chart-container { height: 260px; padding: 16px; }
         }
         .stat-card {
             position: relative;
@@ -287,6 +295,26 @@
             margin-right: 6px;
             opacity: 0.5;
         }
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #252525;
+            font-size: 13px;
+            color: #555;
+        }
+        .footer a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer a:hover {
+            color: #fff;
+        }
+        .footer-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
         .tooltip {
             position: relative;
             border-bottom: 1px dotted #555;
@@ -356,7 +384,30 @@
         .stat-row-value {
             font-variant-numeric: tabular-nums;
         }
+        .chart-section {
+            margin-bottom: 40px;
+        }
+        .chart-section h2 {
+            font-size: 16px;
+            font-weight: 500;
+            color: #888;
+            margin-bottom: 12px;
+        }
+        .chart-container {
+            background: #161616;
+            border: 1px solid #252525;
+            border-radius: 8px;
+            padding: 24px;
+            height: 320px;
+        }
+        .table-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #888;
+            margin-bottom: 12px;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -404,6 +455,15 @@
             </div>
         </div>
 
+        <div class="chart-section">
+            <h2>$10K Investment Growth</h2>
+            <div class="chart-container">
+                <canvas id="returnsChart"></canvas>
+            </div>
+        </div>
+
+        <h2 class="table-title">Year-by-Year Breakdown</h2>
+        <div class="table-wrapper">
         <table>
             <thead>
                 <tr>
@@ -626,6 +686,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
 
         <div class="methodology">
             <h2>Understanding This Data</h2>
@@ -672,7 +733,94 @@
                     <a href="https://www.bls.gov/cpi/" target="_blank">U.S. Bureau of Labor Statistics CPI</a>
                 </div>
             </div>
+
+            <div class="footer">
+                <span>Created by Giorgi Kiknadze</span>
+                <div class="footer-links">
+                    <a href="https://x.com/kiknaio" target="_blank">X @kiknaio</a>
+                    <a href="https://www.linkedin.com/in/giorgikiknadze/" target="_blank">LinkedIn</a>
+                </div>
+            </div>
         </div>
     </div>
+    <script>
+        const ctx = document.getElementById('returnsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+                datasets: [
+                    {
+                        label: 'Nominal Value',
+                        data: [10491, 12147, 12814, 8073, 10210, 11748, 11996, 13916, 18424, 20946, 21235, 23775, 28964, 27695, 36416, 43117, 55492, 45439, 57385, 71736, 84576],
+                        borderColor: '#4ade80',
+                        backgroundColor: 'rgba(74, 222, 128, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Real Value (2005 $)',
+                        data: [10146, 11462, 11615, 7309, 8999, 10201, 10113, 11535, 15045, 16968, 17082, 18732, 22353, 20974, 26957, 31478, 37865, 29115, 35560, 43759, 50235],
+                        borderColor: '#fbbf24',
+                        backgroundColor: 'rgba(251, 191, 36, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        align: 'end',
+                        labels: {
+                            color: '#888',
+                            font: { size: 12 },
+                            boxWidth: 12,
+                            padding: 16
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#222',
+                        titleColor: '#fff',
+                        bodyColor: '#aaa',
+                        borderColor: '#333',
+                        borderWidth: 1,
+                        padding: 12,
+                        callbacks: {
+                            label: ctx => `${ctx.dataset.label}: $${ctx.raw.toLocaleString()}`
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: '#1a1a1a', drawBorder: false },
+                        ticks: { color: '#555', font: { size: 11 } }
+                    },
+                    y: {
+                        grid: { color: '#1a1a1a', drawBorder: false },
+                        ticks: {
+                            color: '#555',
+                            font: { size: 11 },
+                            callback: v => '$' + (v / 1000) + 'K'
+                        },
+                        min: 0
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
