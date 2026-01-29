@@ -8,13 +8,13 @@
     <meta name="description" content="See how inflation erodes S&P 500 gains. $10K invested in 2005 is $84,576 today, but only worth $50,235 in real terms. 21 years of data visualized.">
     <meta name="keywords" content="S&P 500, real returns, inflation adjusted, CAGR, investment returns, purchasing power">
     <meta name="author" content="kiknaio">
-    <link rel="canonical" href="https://realreturns.xyz">
+    <link rel="canonical" href="https://realreturns.xyz/">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="S&P 500 Real Returns (2005-2025)">
     <meta property="og:description" content="Your S&P 500 gains aren't what you think. See how inflation erodes returns over 21 years.">
-    <meta property="og:url" content="https://realreturns.xyz">
+    <meta property="og:url" content="https://realreturns.xyz/">
     <meta property="og:image" content="https://realreturns.xyz/og-image.png">
 
     <!-- Twitter -->
@@ -22,6 +22,64 @@
     <meta name="twitter:title" content="S&P 500 Real Returns (2005-2025)">
     <meta name="twitter:description" content="$10K in 2005 → $84,576 today. But in real terms? Only $50,235. See the full breakdown.">
     <meta name="twitter:image" content="https://realreturns.xyz/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "S&P 500 Real Returns (2005-2025)",
+      "description": "See how inflation erodes S&P 500 gains. $10K invested in 2005 is $84,576 today, but only worth $50,235 in real terms.",
+      "url": "https://realreturns.xyz",
+      "dateModified": "2025-01-29",
+      "author": {
+        "@type": "Person",
+        "name": "Giorgi Kiknadze",
+        "url": "https://x.com/kiknaio"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Giorgi Kiknadze"
+      },
+      "mainEntity": {
+        "@type": "Dataset",
+        "name": "S&P 500 Inflation-Adjusted Returns (2005-2025)",
+        "description": "21 years of S&P 500 total returns adjusted for CPI inflation, showing nominal vs real investment growth",
+        "temporalCoverage": "2005/2025",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": {
+          "@type": "Person",
+          "name": "Giorgi Kiknadze"
+        },
+        "distribution": {
+          "@type": "DataDownload",
+          "encodingFormat": "text/html",
+          "contentUrl": "https://realreturns.xyz"
+        },
+        "variableMeasured": [
+          {
+            "@type": "PropertyValue",
+            "name": "Nominal CAGR",
+            "value": "10.7%"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Real CAGR",
+            "value": "8.0%"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Cumulative Inflation",
+            "value": "64.7%"
+          }
+        ]
+      }
+    }
+    </script>
     <style>
         * {
             margin: 0;

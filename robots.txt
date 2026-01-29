@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://realreturns.xyz/sitemap.xml
