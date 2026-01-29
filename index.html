@@ -330,37 +330,46 @@
         .methodology {
             margin-top: 48px;
             padding-top: 32px;
-            border-top: 1px solid #333;
+            border-top: 1px solid #222;
         }
         .methodology h2 {
-            font-size: 22px;
-            margin-bottom: 24px;
-            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            color: #888;
+            margin-bottom: 16px;
         }
         .method-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             margin-bottom: 24px;
         }
+        @media (max-width: 900px) {
+            .method-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 500px) {
+            .method-grid { grid-template-columns: 1fr; }
+        }
         .method-card {
-            background: #1a1a1a;
-            border-radius: 12px;
+            background: #161616;
+            border-radius: 8px;
             padding: 20px;
-            border: 1px solid #333;
+            border: 1px solid #252525;
         }
         .method-icon {
-            font-size: 28px;
+            font-size: 20px;
             margin-bottom: 12px;
+            opacity: 0.8;
         }
         .method-card h3 {
-            font-size: 16px;
-            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            color: #e0e0e0;
             margin-bottom: 8px;
         }
         .method-card p {
-            font-size: 14px;
-            color: #aaa;
+            font-size: 12px;
+            color: #666;
             line-height: 1.5;
         }
         .method-card em {
@@ -369,41 +378,34 @@
         }
         .case-study {
             background: #161616;
-            border-radius: 12px;
-            padding: 28px 32px;
-            margin-top: 32px;
+            border: 1px solid #252525;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-top: 24px;
         }
         .case-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #fbbf24;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .case-label::before {
-            content: "";
-            width: 8px;
-            height: 8px;
-            background: #fbbf24;
-            border-radius: 50%;
-        }
-        .case-content p {
-            color: #ccc;
-            font-size: 15px;
-            line-height: 1.7;
+            font-size: 11px;
+            font-weight: 500;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             margin-bottom: 12px;
         }
+        .case-content p {
+            color: #888;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
         .case-content p:first-child {
-            font-size: 18px;
-            color: #fff;
+            font-size: 14px;
+            color: #e0e0e0;
             font-weight: 500;
         }
         .case-content p:last-child {
             margin-bottom: 0;
-            color: #888;
-            font-size: 14px;
+            color: #666;
+            font-size: 12px;
         }
         .case-content strong {
             color: #fff;
@@ -864,7 +866,7 @@
             </div>
 
             <div class="case-study">
-                <div class="case-label">Example</div>
+                <div class="case-label">Example Scenario</div>
                 <div class="case-content">
                     <p><strong>$10,000</strong> invested in 2005 → <strong>$84,576</strong> today</p>
                     <p>But a coffee that cost $2 in 2005 now costs $3.30. Everything's more expensive.</p>
