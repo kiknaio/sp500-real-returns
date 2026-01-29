@@ -292,9 +292,21 @@
             color: #666;
         }
         .table-wrapper {
-            overflow-x: auto;
+            overflow: visible;
             margin-bottom: 40px;
-            -webkit-overflow-scrolling: touch;
+        }
+        @media (max-width: 750px) {
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .table-wrapper .tooltip::after,
+            .table-wrapper .tooltip::before {
+                display: none;
+            }
+            .table-wrapper .tooltip {
+                cursor: default;
+            }
         }
         table {
             width: 100%;
@@ -374,7 +386,6 @@
             border: 1px solid #252525;
             border-radius: 8px;
             padding: 20px;
-            overflow: hidden;
         }
         .stat-card .spark {
             position: absolute;
@@ -384,6 +395,7 @@
             height: 60px;
             opacity: 0.25;
             pointer-events: none;
+            clip-path: inset(0 0 0 0 round 0 0 8px 8px);
         }
         .stat-card .spark path {
             stroke-width: 1.5;
